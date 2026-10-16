@@ -1,0 +1,15 @@
+@echo off
+net session >nul 2>&1
+if %errorLevel% neq 0 (
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
+)
+
+bcdedit /set xsavedisable 0
+echo.
+if %errorLevel% equ 0 (
+    echo SUCCESS. Restart computer now
+) else (
+    echo ERROR
+)
+pause
